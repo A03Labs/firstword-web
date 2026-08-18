@@ -77,7 +77,7 @@ export default function Home() {
             </header>
 
             <main className="">
-                <nav className="contents" aria-label="Privacy policy contents">
+                {/* <nav className="contents" aria-label="Privacy policy contents">
                     <p className="contents-title">On this page</p>
                     <ol className="contents-list">
                         {contents.map(([number, title]) => (
@@ -88,7 +88,7 @@ export default function Home() {
                             </li>
                         ))}
                     </ol>
-                </nav>
+                </nav> */}
 
                 <article className="policy-copy">
                     <PolicySection number="01" title="Information We Collect">
@@ -591,7 +591,7 @@ export default function Home() {
                             <a href="https://firstword.online">firstword.online</a>
                             <br />
                             Email: {" "}
-                            <a href="mailto:privacy@firstword.online">privacy@firstword.online</a>
+                            <a href="mailto:hello@firstword.online">privacy@firstword.online</a>
                             <br />
                             Developer: <strong>Alabo Excel</strong>
                         </p>

@@ -47,12 +47,20 @@ export default function Home() {
                         <BrandMark />
                         FirstWord
                     </a>
-                    <a
-                        className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-white/70 transition hover:text-white sm:inline"
-                        href="/privacy"
-                    >
-                        Privacy
-                    </a>
+                    <div className="flex items-center gap-5">
+                        <a
+                            className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-white/70 transition hover:text-white sm:inline"
+                            href="/privacy"
+                        >
+                            Privacy
+                        </a>
+                        <a
+                            className="inline-flex min-h-10 items-center rounded-[5px] bg-white px-4 text-xs font-semibold uppercase tracking-[0.12em] text-black transition hover:bg-white/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                            href="#download"
+                        >
+                            Get the app
+                        </a>
+                    </div>
                 </nav>
 
                 <div
@@ -72,6 +80,7 @@ export default function Home() {
                         </p>
                         <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                             <a
+                                id="download"
                                 className="inline-flex min-h-14 items-center gap-3 rounded-[5px] bg-white px-6 text-sm font-semibold text-black transition hover:bg-white/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                                 href={PLAY_STORE_URL}
                                 target="_blank"
