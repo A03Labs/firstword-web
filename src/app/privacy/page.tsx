@@ -591,7 +591,7 @@ export default function Home() {
                             <a href="https://firstword.online">firstword.online</a>
                             <br />
                             Email: {" "}
-                            <a href="mailto:hello@firstword.online">privacy@firstword.online</a>
+                            <a href="mailto:hello@firstword.online">hello@firstword.online</a>
                             <br />
                             Developer: <strong>Alabo Excel</strong>
                         </p>
@@ -623,7 +623,7 @@ export default function Home() {
 
             <footer className="policy-footer">
                 <p>
-                    FirstWord · <a href="mailto:privacy@firstword.online">privacy@firstword.online</a>
+                    FirstWord · <a href="mailto:hello@firstword.online">hello@firstword.online</a>
                 </p>
             </footer>
         </div>

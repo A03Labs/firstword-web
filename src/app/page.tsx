@@ -209,7 +209,7 @@ export default function Home() {
                         <a className="transition hover:text-white" href="/privacy">
                             Privacy Policy
                         </a>
-                        <a className="transition hover:text-white" href="mailto:privacy@firstword.online">
+                        <a className="transition hover:text-white" href="mailto:hello@firstword.online">
                             Contact
                         </a>
                     </div>
