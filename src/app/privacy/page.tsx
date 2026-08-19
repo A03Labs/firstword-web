@@ -6,33 +6,6 @@ type PolicySectionProps = {
     children: ReactNode;
 };
 
-const contents = [
-    ["01", "Information We Collect"],
-    ["02", "Bible Reading Data"],
-    ["03", "Notes, Reflections, Prayers, and Journals"],
-    ["04", "Focus Mode and App Blocking"],
-    ["05", "Device and Technical Information"],
-    ["06", "Notifications"],
-    ["07", "Location Information"],
-    ["08", "Payments and Subscriptions"],
-    ["09", "Third-Party Services"],
-    ["10", "Bible Content"],
-    ["11", "How We Use Your Information"],
-    ["12", "Advertising"],
-    ["13", "Data Sharing"],
-    ["14", "Your Private Content"],
-    ["15", "Data Security"],
-    ["16", "Data Retention"],
-    ["17", "Account Deletion"],
-    ["18", "Children's Privacy"],
-    ["19", "Your Privacy Rights"],
-    ["20", "International Data Transfers"],
-    ["21", "Cookies and Similar Technologies"],
-    ["22", "Changes to This Privacy Policy"],
-    ["23", "Contact Us"],
-    ["24", "Summary"],
-] as const;
-
 function PolicySection({ number, title, children }: PolicySectionProps) {
     return (
         <section className="policy-section" id={`section-${number}`}>

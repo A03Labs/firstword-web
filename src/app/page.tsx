@@ -209,6 +209,9 @@ export default function Home() {
                         <a className="transition hover:text-white" href="/privacy">
                             Privacy Policy
                         </a>
+                        <a className="transition hover:text-white" href="/delete-account">
+                            Delete Account
+                        </a>
                         <a className="transition hover:text-white" href="mailto:hello@firstword.online">
                             Contact
                         </a>
