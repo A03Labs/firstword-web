@@ -1,3 +1,21 @@
+import { PlayStoreBadge } from "./components/google-play";
+import { SiteFooter } from "./components/site-footer";
+import { SiteHeader } from "./components/site-header";
+import {
+    displayLg,
+    displayMd,
+    displayXl,
+    eyebrow,
+    eyebrowOnInk,
+    label,
+    labelOnInk,
+    lede,
+    ledeOnInk,
+    panel,
+    panelPad,
+    shell,
+} from "./components/styles";
+
 const PLAY_STORE_URL = "https://play.google.com/store/search?q=FirstWord&c=apps";
 
 const features = [
@@ -14,210 +32,185 @@ const features = [
     {
         number: "03",
         title: "Set the phone aside",
-        text: "Focus Mode helps protect a fixed span of time for reading, prayer, and attention.",
+        text: "Focus Mode protects a fixed span of time for reading, prayer, and attention.",
     },
 ];
 
-function PlayStoreMark() {
+/**
+ * The product, shown rather than described. Height comes from the passage
+ * rather than a fixed aspect-ratio — the copy is static, so the page is stable
+ * without leaving a void where a taller frame would run out of text.
+ */
+function ReadingPage() {
     return (
-        <span aria-hidden="true" className="text-lg leading-none">
-            ▶
-        </span>
-    );
-}
+        <figure className="m-0 w-full max-w-[22rem]">
+            <div className="rounded-[1.75rem] border border-rule-on-ink bg-black/25 p-3">
+                <div className="flex flex-col rounded-[1.15rem] bg-surface px-5 py-5 text-foreground">
+                    <div className="flex items-baseline justify-between gap-3 border-b border-rule pb-3">
+                        <span className={label}>Matthew 5</span>
+                        <span className={`${label} whitespace-nowrap`}>12 min</span>
+                    </div>
 
-function BrandMark() {
-    return (
-        <span className="grid size-9 place-items-center rounded-full bg-white text-sm font-semibold text-black">
-            F
-        </span>
+                    <p className="mt-6 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-foreground">
+                        The sermon on the mount
+                    </p>
+
+                    {/* Verse numbers carry the reference without colour, the way a
+                        printed page sets them: smaller, raised, quieter. */}
+                    <p className="mt-3 text-[1.3rem] leading-[1.5] tracking-[-0.02em]">
+                        <sup className="mr-0.5 align-super text-[0.6rem] font-semibold text-muted">
+                            14
+                        </sup>
+                        You are the light of the world. A city set on a hill cannot be hidden.{" "}
+                        <sup className="mr-0.5 align-super text-[0.6rem] font-semibold text-muted">
+                            15
+                        </sup>
+                        Nor do people light a lamp and put it under a basket, but on a stand.{" "}
+                        <sup className="mr-0.5 align-super text-[0.6rem] font-semibold text-muted">
+                            16
+                        </sup>
+                        <span className="text-muted">
+                            In the same way, let your light shine before others.
+                        </span>
+                    </p>
+
+                    <div className="mt-7 flex items-center justify-between gap-3 border-t border-rule pt-4">
+                        <span className={label}>Note saved</span>
+                        <span className="text-xs font-semibold tabular-nums">v. 14</span>
+                    </div>
+                </div>
+            </div>
+            <figcaption className={`${labelOnInk} mt-4 block text-center`}>
+                A page, not a feed
+            </figcaption>
+        </figure>
     );
 }
 
 export default function Home() {
     return (
-        <main className="min-h-screen overflow-hidden bg-background text-foreground">
-            <section className="bg-black text-white">
-                <nav className="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between py-6 sm:w-[min(1120px,calc(100%-3rem))]">
-                    <a
-                        className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em]"
-                        href="#top"
-                        aria-label="FirstWord home"
-                    >
-                        <BrandMark />
-                        FirstWord
-                    </a>
-                    <div className="flex items-center gap-5">
-                        <a
-                            className="hidden text-xs font-semibold uppercase tracking-[0.14em] text-white/70 transition hover:text-white sm:inline"
-                            href="/privacy"
-                        >
-                            Privacy
-                        </a>
-                        <a
-                            className="inline-flex min-h-10 items-center rounded-[5px] bg-white px-4 text-xs font-semibold uppercase tracking-[0.12em] text-black transition hover:bg-white/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                            href="#download"
-                        >
-                            Get the app
-                        </a>
-                    </div>
-                </nav>
-
-                <div
-                    id="top"
-                    className="mx-auto grid w-[min(1120px,calc(100%-2rem))] items-center gap-14 pb-20 pt-14 sm:w-[min(1120px,calc(100%-3rem))] sm:pb-28 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-24"
-                >
-                    <div className="max-w-2xl">
-                        <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
-                            A Bible reading office
-                        </p>
-                        <h1 className="max-w-xl text-[clamp(3.6rem,9vw,7.5rem)] font-normal leading-[0.9] tracking-[-0.07em]">
+        <>
+            <SiteHeader hide={["delete-account"]}>
+                <div className="grid items-center gap-12 pb-16 pt-8 sm:pb-24 sm:pt-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-20">
+                    <div>
+                        <p className={eyebrowOnInk}>A Bible reading office</p>
+                        <h1 className={`${displayXl} mt-5 max-w-[18ch]`}>
                             Make room for the Word.
                         </h1>
-                        <p className="mt-8 max-w-lg text-lg leading-8 text-white/70 sm:text-xl">
-                            FirstWord is a Bible, devotional, prayer, and focus app for a
-                            quieter kind of attention.
+                        <p className={`${ledeOnInk} mt-7 max-w-[46ch]`}>
+                            FirstWord is a Bible, devotional, prayer, and focus app for a quieter
+                            kind of attention.
                         </p>
-                        <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                            <a
-                                id="download"
-                                className="inline-flex min-h-14 items-center gap-3 rounded-[5px] bg-white px-6 text-sm font-semibold text-black transition hover:bg-white/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                                href={PLAY_STORE_URL}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <PlayStoreMark />
-                                <span>
-                                    <span className="block text-[0.62rem] font-medium uppercase tracking-[0.14em] opacity-60">
-                                        Get it on
-                                    </span>
-                                    <span className="block text-base leading-5">Google Play</span>
-                                </span>
-                            </a>
-                            <span className="text-xs uppercase tracking-[0.14em] text-white/50">
-                                Free to begin
-                            </span>
+                        <div
+                            className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6"
+                            id="download"
+                        >
+                            <PlayStoreBadge href={PLAY_STORE_URL} tone="paper" />
+                            <span className={labelOnInk}>Free to begin</span>
                         </div>
                     </div>
+                    <div className="flex justify-center lg:justify-end">
+                        <ReadingPage />
+                    </div>
+                </div>
+            </SiteHeader>
 
-                    <div className="relative mx-auto w-full max-w-[330px] lg:mr-0">
-                        <div className="absolute -left-10 top-14 hidden size-20 rounded-full bg-white/10 sm:block" />
-                        <div className="relative rounded-[28px] bg-[#17181a] p-3 shadow-2xl shadow-black/40">
-                            <div className="rounded-[20px] bg-white px-5 pb-8 pt-4 text-black">
-                                <div className="mx-auto mb-8 h-1 w-14 rounded-full bg-black/15" />
-                                <div className="mb-8 flex items-center justify-between text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-black/50">
-                                    <span>Matthew 5</span>
-                                    <span>Focus</span>
-                                </div>
-                                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-black/50">
-                                    The sermon on the mount
-                                </p>
-                                <p className="text-[1.55rem] leading-[1.35] tracking-[-0.035em]">
-                                    You are the light of the world. A city set on a hill cannot be hidden.
-                                </p>
-                                <div className="mt-8 flex items-center justify-between bg-[#e4e7e6] px-3 py-3 text-xs font-semibold uppercase tracking-[0.12em]">
-                                    <span>Reading time</span>
-                                    <span>12 min</span>
-                                </div>
+            <main>
+                <section className={`${shell} py-16 sm:py-24`}>
+                    <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+                        <div>
+                            <p className={eyebrow}>Why FirstWord</p>
+                            <h2 className={`${displayLg} mt-5 max-w-[16ch]`}>
+                                Attention is a place you can return to.
+                            </h2>
+                        </div>
+                        {/* One sheet, divided by hairlines — not three cards on a card. */}
+                        <div className={`${panel} grid divide-y divide-rule sm:grid-cols-3 sm:divide-x sm:divide-y-0`}>
+                            {features.map((feature) => (
+                                <article
+                                    className="flex flex-col p-6 transition-colors duration-150 hover:bg-surface-muted motion-reduce:transition-none sm:min-h-[14rem]"
+                                    key={feature.number}
+                                >
+                                    <p className="text-xs font-semibold tabular-nums tracking-[0.2em] text-foreground">
+                                        {feature.number}
+                                    </p>
+                                    {/* Flowed from the top so all three numbers and all three
+                                        titles sit on shared baselines regardless of copy length. */}
+                                    <h3 className="mt-5 text-lg font-normal leading-snug tracking-[-0.02em]">
+                                        {feature.title}
+                                    </h3>
+                                    <p className="mt-2.5 text-sm leading-6 text-muted">
+                                        {feature.text}
+                                    </p>
+                                </article>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="border-y border-rule bg-surface-muted">
+                    <div className={`${shell} py-16 sm:py-24`}>
+                        {/* Centred so the rule sits in the optical middle of the band rather
+                            than stranding half the width as dead space. */}
+                        <blockquote className="mx-auto max-w-[40ch] border-l-[3px] border-foreground pl-6 sm:pl-8">
+                            <p className={displayMd}>
+                                Thy word is a lamp unto my feet, and a light unto my path.
+                            </p>
+                            <footer className={`${label} mt-5 block not-italic`}>
+                                Psalm 119:105
+                            </footer>
+                        </blockquote>
+                    </div>
+                </section>
+
+                <section className={`${shell} py-16 sm:py-24`}>
+                    <div className="grid items-center gap-12 lg:grid-cols-[1fr_0.85fr] lg:gap-20">
+                        <div>
+                            <p className={eyebrow}>Focus mode</p>
+                            <h2 className={`${displayLg} mt-5 max-w-[20ch]`}>
+                                Put the phone down. Keep the promise.
+                            </h2>
+                            <p className={`${lede} mt-7 max-w-[48ch]`}>
+                                Choose a reading or devotional session, set the time, and let
+                                FirstWord make the space around it quieter.
+                            </p>
+                            <div className="mt-9">
+                                <PlayStoreBadge href={PLAY_STORE_URL} tone="ink" />
                             </div>
                         </div>
-                        <p className="mt-4 text-center text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-white/40">
-                            A page, not a feed
-                        </p>
-                    </div>
-                </div>
-            </section>
 
-            <section className="mx-auto w-[min(1120px,calc(100%-2rem))] py-20 sm:w-[min(1120px,calc(100%-3rem))] sm:py-28">
-                <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
-                    <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                            Why FirstWord
-                        </p>
-                        <h2 className="mt-5 max-w-md text-4xl font-normal leading-[1] tracking-[-0.055em] sm:text-5xl">
-                            Attention is a place you can return to.
-                        </h2>
-                    </div>
-                    <div className="grid gap-0 bg-white sm:grid-cols-3">
-                        {features.map((feature) => (
-                            <article
-                                className="bg-white p-6 transition hover:bg-surface-muted sm:min-h-64 sm:p-7"
-                                key={feature.number}
-                            >
-                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                                    {feature.number}
-                                </p>
-                                <h3 className="mt-14 text-xl font-normal leading-tight tracking-[-0.03em]">
-                                    {feature.title}
-                                </h3>
-                                <p className="mt-3 text-sm leading-6 text-muted">{feature.text}</p>
-                            </article>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="bg-surface-muted">
-                <div className="mx-auto grid w-[min(1120px,calc(100%-2rem))] items-center gap-12 py-20 sm:w-[min(1120px,calc(100%-3rem))] sm:py-28 lg:grid-cols-[1fr_0.8fr] lg:gap-24">
-                    <div className="max-w-xl">
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                            Focus mode
-                        </p>
-                        <h2 className="mt-5 text-4xl font-normal leading-[1] tracking-[-0.055em] sm:text-6xl">
-                            Put the phone down. Keep the promise.
-                        </h2>
-                        <p className="mt-7 max-w-lg text-lg leading-8 text-muted">
-                            Choose a reading or devotional session, set the time, and let
-                            FirstWord make the space around it quieter.
-                        </p>
-                        <a
-                            className="mt-8 inline-flex items-center gap-3 rounded-[5px] bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-                            href={PLAY_STORE_URL}
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <PlayStoreMark />
-                            Download FirstWord
-                        </a>
-                    </div>
-                    <div className="bg-white p-6 sm:p-8">
-                        <div className="flex items-start justify-between">
-                            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                                Session active
+                        <div className={`${panel} ${panelPad}`}>
+                            <div className="flex items-center justify-between">
+                                <p className={label}>Session active</p>
+                                <span
+                                    className="size-2.5 rounded-full bg-foreground"
+                                    aria-hidden="true"
+                                />
+                            </div>
+                            {/* tabular-nums keeps the countdown from reflowing each second. */}
+                            <p className="mt-8 text-[clamp(3.5rem,11vw,5.5rem)] font-normal leading-none tracking-[-0.045em] tabular-nums">
+                                24:00
                             </p>
-                            <span className="size-3 rounded-full bg-black" aria-label="Session active" />
-                        </div>
-                        <p className="mt-10 text-7xl font-normal tracking-[-0.08em] sm:text-8xl">24:00</p>
-                        <div className="mt-8 h-2 bg-surface-muted">
-                            <div className="h-2 w-2/3 bg-black" />
-                        </div>
-                        <div className="mt-5 flex justify-between text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                            <span>Psalm 27</span>
-                            <span>Reading</span>
+                            <div
+                                className="mt-7 h-1.5 bg-surface-muted"
+                                role="progressbar"
+                                aria-label="Session progress"
+                                aria-valuenow={67}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                            >
+                                <div className="h-full w-2/3 bg-foreground" />
+                            </div>
+                            <div className="mt-4 flex items-center justify-between">
+                                <span className={label}>Psalm 27</span>
+                                <span className={label}>Reading</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </main>
 
-            <footer className="bg-black text-white">
-                <div className="mx-auto flex w-[min(1120px,calc(100%-2rem))] flex-col gap-6 py-10 sm:w-[min(1120px,calc(100%-3rem))] sm:flex-row sm:items-center sm:justify-between">
-                    <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em]">
-                        <BrandMark />
-                        FirstWord
-                    </div>
-                    <div className="flex gap-6 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
-                        <a className="transition hover:text-white" href="/privacy">
-                            Privacy Policy
-                        </a>
-                        <a className="transition hover:text-white" href="/delete-account">
-                            Delete Account
-                        </a>
-                        <a className="transition hover:text-white" href="mailto:hello@firstword.online">
-                            Contact
-                        </a>
-                    </div>
-                </div>
-            </footer>
-        </main>
+            <SiteFooter />
+        </>
     );
 }

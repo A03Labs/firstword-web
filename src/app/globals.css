@@ -1,321 +1,62 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   FirstWord — theme tokens only.
+   Every visual decision lives in Tailwind utility classes in the components.
+   This file exists purely to declare the monochrome ramp and expose it to
+   Tailwind, so `bg-surface`, `text-muted`, `border-rule` etc. resolve.
+
+   Light and dark are two sets of values for the same token names, swapped by
+   prefers-color-scheme. That keeps the markup free of `dark:` duplicates —
+   a component says `bg-surface` once and is correct in both themes.
+   --------------------------------------------------------------------------- */
+
 :root {
-    --background: #f2f4f3;
+    /* Paper */
+    --background: #f4f4f4;
     --surface: #ffffff;
-    --surface-muted: #e4e7e6;
-    --foreground: #000000;
-    --muted: #575757;
-    --primary: #000000;
-    --rubric: #000000;
-    --danger: #b3261e;
-    --font-family-sans: "DM Sans", "Avenir Next", Avenir, "Segoe UI", sans-serif;
+    --surface-muted: #e4e4e4;
+    --rule: #d1d1d1;
+
+    /* Ink */
+    --foreground: #121212;
+    --muted: #5a5a5a;
+
+    /* The dark plate used for masthead, hero, and colophon */
+    --ink-panel: #121212;
+    --on-ink: #f4f4f4;
+    --on-ink-muted: #a1a1a1;
+    --rule-on-ink: #333333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0f0f0f;
+        --surface: #191919;
+        --surface-muted: #242424;
+        --rule: #333333;
+
+        --foreground: #f0f0f0;
+        --muted: #a0a0a0;
+
+        --ink-panel: #191919;
+        --on-ink: #f0f0f0;
+        --on-ink-muted: #a0a0a0;
+        --rule-on-ink: #3b3b3b;
+    }
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-surface: var(--surface);
     --color-surface-muted: var(--surface-muted);
+    --color-rule: var(--rule);
     --color-foreground: var(--foreground);
     --color-muted: var(--muted);
-    --color-primary: var(--primary);
-    --color-rubric: var(--rubric);
-    --color-danger: var(--danger);
-    --font-sans: var(--font-family-sans);
-}
+    --color-ink-panel: var(--ink-panel);
+    --color-on-ink: var(--on-ink);
+    --color-on-ink-muted: var(--on-ink-muted);
+    --color-rule-on-ink: var(--rule-on-ink);
 
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-family-sans);
-    font-weight: 400;
-    text-rendering: optimizeLegibility;
-}
-
-a {
-    color: inherit;
-}
-
-::selection {
-    background: var(--foreground);
-    color: var(--surface);
-}
-
-.policy-shell {
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-.policy-header {
-    background: var(--foreground);
-    color: var(--surface);
-}
-
-.header-inner,
-.content-grid {
-    width: min(1120px, calc(100% - 3rem));
-    margin: 0 auto;
-}
-
-.header-inner {
-    padding: 2rem 0 5.5rem;
-}
-
-.brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-.brand-mark {
-    display: grid;
-    width: 2rem;
-    height: 2rem;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--surface);
-    color: var(--foreground);
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.eyebrow,
-.contents-title,
-.section-number {
-    color: var(--rubric);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.17em;
-    text-transform: uppercase;
-}
-
-.eyebrow {
-    margin: 5.5rem 0 1rem;
-    color: var(--surface);
-}
-
-.policy-title {
-    max-width: 750px;
-    margin: 0;
-    font-family: var(--font-family-sans);
-    font-size: clamp(3.5rem, 8vw, 6.8rem);
-    font-weight: 400;
-    letter-spacing: -0.055em;
-    line-height: 0.94;
-}
-
-.policy-intro {
-    max-width: 610px;
-    margin: 2rem 0 0;
-    color: var(--surface);
-    font-size: 1.1rem;
-    line-height: 1.7;
-}
-
-.updated {
-    display: block;
-    margin-top: 2.5rem;
-    color: var(--surface);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.content-grid {
-    display: grid;
-    grid-template-columns: 210px minmax(0, 720px);
-    gap: clamp(3rem, 8vw, 8rem);
-    align-items: start;
-    padding-top: 5rem;
-    padding-bottom: 6rem;
-}
-
-.contents {
-    position: sticky;
-    top: 2rem;
-}
-
-.contents-title {
-    margin: 0 0 1rem;
-    color: var(--muted);
-}
-
-.contents-list {
-    display: grid;
-    gap: 0.45rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.contents-list a {
-    color: var(--muted);
-    font-size: 0.8rem;
-    line-height: 1.35;
-    text-decoration: none;
-    transition: color 160ms ease;
-}
-
-.contents-list a:hover,
-.contents-list a:focus-visible {
-    color: var(--foreground);
-    font-weight: 600;
-}
-
-.policy-copy {
-    min-width: 0;
-    padding: clamp(2rem, 5vw, 5rem);
-    background: var(--surface);
-}
-
-.policy-section {
-    scroll-margin-top: 2rem;
-    padding: 0 0 3.8rem;
-}
-
-.policy-section+.policy-section {
-    padding-top: 3.8rem;
-}
-
-.section-number {
-    display: block;
-    margin-bottom: 0.85rem;
-}
-
-.section-title {
-    margin: 0 0 1.4rem;
-    font-family: var(--font-family-sans);
-    font-size: clamp(1.8rem, 4vw, 2.55rem);
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 1.08;
-}
-
-.policy-section p,
-.policy-section li {
-    color: var(--foreground);
-    font-size: 1rem;
-    line-height: 1.8;
-}
-
-.policy-section p {
-    margin: 0 0 1rem;
-}
-
-.policy-section p:last-child {
-    margin-bottom: 0;
-}
-
-.policy-section strong {
-    color: var(--foreground);
-    font-weight: 700;
-}
-
-.policy-section h3 {
-    margin: 2rem 0 0.65rem;
-    color: var(--rubric);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-}
-
-.policy-section ul {
-    display: grid;
-    gap: 0.35rem;
-    margin: 0.5rem 0 1.2rem;
-    padding-left: 1.25rem;
-}
-
-.policy-section li::marker {
-    color: var(--rubric);
-}
-
-.policy-section a {
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.18em;
-}
-
-.policy-quote {
-    margin: 1.5rem 0 0;
-    padding: 1.25rem 1.4rem;
-    background: var(--surface-muted);
-    color: var(--foreground) !important;
-    font-size: 1.25rem !important;
-    font-weight: 400;
-    line-height: 1.5 !important;
-}
-
-.policy-footer {
-    padding: 2rem 1.5rem 3rem;
-    background: var(--foreground);
-    color: var(--surface);
-    text-align: center;
-}
-
-.policy-footer p {
-    margin: 0;
-    font-size: 0.8rem;
-}
-
-.policy-footer a {
-    font-weight: 600;
-}
-
-@media (max-width: 760px) {
-
-    .header-inner,
-    .content-grid {
-        width: min(100% - 2rem, 640px);
-    }
-
-    .header-inner {
-        padding-bottom: 4rem;
-    }
-
-    .eyebrow {
-        margin-top: 4.5rem;
-    }
-
-    .content-grid {
-        display: block;
-        padding-top: 2rem;
-    }
-
-    .contents {
-        position: static;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        background: var(--surface-muted);
-    }
-
-    .contents-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .policy-copy {
-        padding: 2rem 1.25rem;
-    }
-
-    .policy-section,
-    .policy-section+.policy-section {
-        padding-top: 2.8rem;
-        padding-bottom: 2.8rem;
-    }
+    --font-sans: var(--font-dm-sans), "Avenir Next", Avenir, "Segoe UI", sans-serif;
 }

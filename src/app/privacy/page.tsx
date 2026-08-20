@@ -1,4 +1,63 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
+
+import { SiteFooter } from "../components/site-footer";
+import { SiteHeader } from "../components/site-header";
+import { displayLg, eyebrowOnInk, ledeOnInk, shell } from "../components/styles";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy",
+    description:
+        "How FirstWord handles your account, reading activity, notes, prayers, and focus data — and what stays private by default.",
+};
+
+const LAST_UPDATED = "August 18, 2026";
+
+/**
+ * Section titles, kept in the same order as the document below so the contents
+ * list and the copy cannot drift apart.
+ */
+const contents = [
+    ["01", "Information We Collect"],
+    ["02", "Bible Reading Data"],
+    ["03", "Notes, Reflections, Prayers, and Journals"],
+    ["04", "Focus Mode and App Blocking"],
+    ["05", "Device and Technical Information"],
+    ["06", "Notifications"],
+    ["07", "Location Information"],
+    ["08", "Payments and Subscriptions"],
+    ["09", "Third-Party Services"],
+    ["10", "Bible Content"],
+    ["11", "How We Use Your Information"],
+    ["12", "Advertising"],
+    ["13", "Data Sharing"],
+    ["14", "Your Private Content"],
+    ["15", "Data Security"],
+    ["16", "Data Retention"],
+    ["17", "Account Deletion"],
+    ["18", "Children's Privacy"],
+    ["19", "Your Privacy Rights"],
+    ["20", "International Data Transfers"],
+    ["21", "Cookies and Similar Technologies"],
+    ["22", "Changes to This Privacy Policy"],
+    ["23", "Contact Us"],
+    ["24", "Summary"],
+] as const;
+
+/**
+ * Prose styling for the document body, applied once on the container as
+ * arbitrary descendant variants rather than repeated on 500 lines of markup.
+ * Note these descendant rules outrank a plain utility on the child itself, so
+ * anything that needs to differ (the pull-quote) uses a non-<p> element.
+ */
+const prose = [
+    "[&_p]:mb-4 [&_p]:text-base [&_p]:leading-[1.75] [&_p:last-child]:mb-0",
+    "[&_ul]:mt-2 [&_ul]:mb-5 [&_ul]:grid [&_ul]:list-disc [&_ul]:gap-1.5 [&_ul]:pl-5",
+    "[&_li]:text-base [&_li]:leading-[1.75] marker:text-muted",
+    "[&_h3]:mt-8 [&_h3]:mb-2.5 [&_h3]:text-[0.8rem] [&_h3]:font-semibold [&_h3]:uppercase [&_h3]:tracking-[0.14em] [&_h3]:text-muted",
+    "[&_strong]:font-bold",
+    "[&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-1",
+].join(" ");
 
 type PolicySectionProps = {
     number: string;
@@ -8,9 +67,16 @@ type PolicySectionProps = {
 
 function PolicySection({ number, title, children }: PolicySectionProps) {
     return (
-        <section className="policy-section" id={`section-${number}`}>
-            <span className="section-number">Section {number.replace(/^0/, "")}</span>
-            <h2 className="section-title">{title}</h2>
+        <section
+            className="scroll-mt-6 py-12 first:pt-0 last:pb-0"
+            id={`section-${number}`}
+        >
+            <span className="mb-3 block text-[0.7rem] font-semibold uppercase tabular-nums tracking-[0.2em] text-muted">
+                Section {number.replace(/^0/, "")}
+            </span>
+            <h2 className="mb-5 text-[clamp(1.5rem,3.2vw,2.15rem)] font-normal leading-[1.1] tracking-[-0.035em] text-balance">
+                {title}
+            </h2>
             {children}
         </section>
     );
@@ -26,44 +92,56 @@ function List({ items }: { items: string[] }) {
     );
 }
 
-export default function Home() {
+export default function PrivacyPolicyPage() {
     return (
-        <div className="policy-shell">
-            <header className="policy-header">
-                <div className="header-inner">
-                    <a className="brand" href="#top" aria-label="FirstWord home">
-                        <span className="brand-mark" aria-hidden="true">
-                            F
-                        </span>
-                        FirstWord
-                    </a>
-                    <p className="eyebrow">A quiet place for what matters</p>
-                    <h1 className="policy-title" id="top">
+        <div className="min-h-screen">
+            <SiteHeader hide={["privacy"]}>
+                <div className="pb-16 pt-4 sm:pb-20">
+                    <p className={eyebrowOnInk}>A quiet place for what matters</p>
+                    <h1 className={`${displayLg} mt-5 max-w-[16ch]`} id="top">
                         Privacy Policy
                     </h1>
-                    <p className="policy-intro">
-                        FirstWord is designed to help you spend more time in God&apos;s Word,
-                        with your reading, prayers, and reflections kept yours.
+                    <p className={`${ledeOnInk} mt-7 max-w-[58ch]`}>
+                        FirstWord is designed to help you spend more time in God&apos;s Word, with
+                        your reading, prayers, and reflections kept yours.
                     </p>
-                    <span className="updated">Last updated: August 18, 2026</span>
+                    <span className="mt-9 block text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-on-ink-muted">
+                        Last updated: {LAST_UPDATED}
+                    </span>
                 </div>
-            </header>
+            </SiteHeader>
 
-            <main className="">
-                {/* <nav className="contents" aria-label="Privacy policy contents">
-                    <p className="contents-title">On this page</p>
-                    <ol className="contents-list">
+            <div
+                className={`${shell} grid items-start gap-10 py-12 lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-[clamp(3rem,6vw,6rem)] lg:py-18`}
+            >
+                {/* 24 sections is too many to scan by scrolling — this is the way in. */}
+                <nav
+                    className="border border-rule bg-surface-muted p-5 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:border-0 lg:border-l lg:bg-transparent lg:p-0 lg:pl-5"
+                    aria-label="Privacy policy contents"
+                >
+                    <p className="mb-4 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-muted">
+                        On this page
+                    </p>
+                    <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-x-5 gap-y-2 p-0 lg:grid-cols-1">
                         {contents.map(([number, title]) => (
                             <li key={number}>
-                                <a href={`#section-${number}`}>
-                                    {number.replace(/^0/, "")} {title}
+                                <a
+                                    className="grid grid-cols-[1.6rem_minmax(0,1fr)] text-[0.8rem] leading-[1.4] text-muted no-underline transition-colors duration-150 hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground motion-reduce:transition-none"
+                                    href={`#section-${number}`}
+                                >
+                                    <span className="font-semibold tabular-nums text-foreground">
+                                        {number.replace(/^0/, "")}
+                                    </span>
+                                    <span>{title}</span>
                                 </a>
                             </li>
                         ))}
                     </ol>
-                </nav> */}
+                </nav>
 
-                <article className="policy-copy">
+                <main
+                    className={`min-w-0 max-w-[68ch] divide-y divide-rule border border-rule bg-surface p-6 sm:p-10 lg:p-14 ${prose}`}
+                >
                     <PolicySection number="01" title="Information We Collect">
                         <p>We collect information necessary to provide and improve FirstWord.</p>
                         <h3>1.1 Account Information</h3>
@@ -572,10 +650,10 @@ export default function Home() {
 
                     <PolicySection number="24" title="Summary">
                         <p>In simple terms:</p>
-                        <p className="policy-quote">
+                        <blockquote className="my-6 border-l-[3px] border-foreground pl-5 text-[1.2rem] leading-[1.55]">
                             FirstWord is designed to help you spend more time in God&apos;s Word,
                             not to collect unnecessary information about you.
-                        </p>
+                        </blockquote>
                         <p>
                             We collect information needed to provide your account, save your
                             progress, synchronize your private content, provide focus features,
@@ -591,14 +669,10 @@ export default function Home() {
                             <strong>We do not sell your personal information.</strong>
                         </p>
                     </PolicySection>
-                </article>
-            </main>
+                </main>
+            </div>
 
-            <footer className="policy-footer">
-                <p>
-                    FirstWord · <a href="mailto:hello@firstword.online">hello@firstword.online</a>
-                </p>
-            </footer>
+            <SiteFooter />
         </div>
     );
 }
