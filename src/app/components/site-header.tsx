@@ -40,7 +40,7 @@ export function SiteHeader({ children, hide = [] }: SiteHeaderProps) {
                                 </Link>
                             ))} */}
                         <Link className={btnQuiet} href="/#download">
-                            Get the app
+                            Get Started
                         </Link>
                     </nav>
                 </div>
