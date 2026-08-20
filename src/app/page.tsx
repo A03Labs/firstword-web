@@ -1,6 +1,6 @@
-import { PlayStoreBadge } from "./components/google-play";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
+import { StoreBadges } from "./components/store-badges";
 import {
     displayLg,
     displayMd,
@@ -15,8 +15,6 @@ import {
     panelPad,
     shell,
 } from "./components/styles";
-
-const PLAY_STORE_URL = "https://play.google.com/store/search?q=FirstWord&c=apps";
 
 const features = [
     {
@@ -76,13 +74,13 @@ function ReadingPage() {
 
                     <div className="mt-7 flex items-center justify-between gap-3 border-t border-rule pt-4">
                         <span className={label}>Note saved</span>
-                        <span className="text-xs font-semibold tabular-nums">v. 14</span>
+                        {/* <span className="text-xs font-semibold tabular-nums">v. 14</span> */}
                     </div>
                 </div>
             </div>
-            <figcaption className={`${labelOnInk} mt-4 block text-center`}>
+            {/* <figcaption className={`${labelOnInk} mt-4 block text-center`}>
                 A page, not a feed
-            </figcaption>
+            </figcaption> */}
         </figure>
     );
 }
@@ -101,12 +99,8 @@ export default function Home() {
                             FirstWord is a Bible, devotional, prayer, and focus app for a quieter
                             kind of attention.
                         </p>
-                        <div
-                            className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6"
-                            id="download"
-                        >
-                            <PlayStoreBadge href={PLAY_STORE_URL} tone="paper" />
-                            <span className={labelOnInk}>Free to begin</span>
+                        <div className="mt-9" id="download">
+                            <StoreBadges tone="paper" />
                         </div>
                     </div>
                     <div className="flex justify-center lg:justify-end">
@@ -174,9 +168,7 @@ export default function Home() {
                                 Choose a reading or devotional session, set the time, and let
                                 FirstWord make the space around it quieter.
                             </p>
-                            <div className="mt-9">
-                                <PlayStoreBadge href={PLAY_STORE_URL} tone="ink" />
-                            </div>
+                            <StoreBadges tone="ink" className="mt-9" />
                         </div>
 
                         <div className={`${panel} ${panelPad}`}>

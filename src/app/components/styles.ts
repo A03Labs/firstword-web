@@ -47,8 +47,10 @@ export const btnPaper = `${btnBase} bg-on-ink text-ink-panel hover:bg-on-ink-mut
 export const btnQuiet =
     "inline-flex min-h-10 items-center rounded border border-rule-on-ink px-4 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-on-ink no-underline transition-colors duration-150 hover:bg-on-ink hover:text-ink-panel focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-on-ink motion-reduce:transition-none";
 
-/** Two-line store badge. Fixed format so a long store name cannot reflow it. */
-export const btnStore = "justify-start min-h-[3.5rem] text-left";
+/** Two-line store badge. Fixed format so a long store name cannot reflow it,
+ *  and a shared min-width so "Download on the" and "Get it on" produce buttons
+ *  of equal width rather than a ragged pair. */
+export const btnStore = "min-h-[3.5rem] justify-start text-left sm:min-w-[12.5rem]";
 export const btnStoreCaption =
     "block text-[0.6rem] font-medium uppercase leading-tight tracking-[0.14em] opacity-65";
 export const btnStoreName = "block text-base leading-snug";
