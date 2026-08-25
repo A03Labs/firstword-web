@@ -1,13 +1,25 @@
+import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * The dove-and-open-book emblem, cut out of the full logo lockup — the site
+ * spells "FirstWord" in DM Sans beside it rather than reusing the logo's own
+ * wordmark, so the two never compete.
+ *
+ * The art is white with a transparent ground, so it reads on the ink plate
+ * (`plate`) and nowhere else. `/images/logo-mark.png` is drawn slightly heavier
+ * than the source hairlines so it survives the downscale to ~36px.
+ */
 export function BrandMark() {
     return (
-        <span
-            className="grid size-8 shrink-0 place-items-center rounded-full bg-on-ink text-[0.9rem] font-semibold tracking-normal text-ink-panel"
-            aria-hidden="true"
-        >
-            F
-        </span>
+        <Image
+            className="size-9 shrink-0"
+            src="/images/logo-mark.png"
+            alt=""
+            width={72}
+            height={72}
+            priority
+        />
     );
 }
 
