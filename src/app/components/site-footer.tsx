@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Brand } from "./brand";
 import { plate, plateLink, shell } from "./styles";
 
-export const CONTACT_EMAIL = "hello@firstword.online";
+export const CONTACT_EMAIL = "firstwordonline@gmail.com";
 
 export function SiteFooter() {
     return (
@@ -15,6 +15,9 @@ export function SiteFooter() {
                 <div className="flex flex-wrap gap-x-6 gap-y-2">
                     <Link className={plateLink} href="/privacy">
                         Privacy Policy
+                    </Link>
+                    <Link className={plateLink} href="/terms">
+                        Terms of Use
                     </Link>
                     <Link className={plateLink} href="/delete-account">
                         Delete Account

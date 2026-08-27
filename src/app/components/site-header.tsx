@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Brand } from "./brand";
 import { btnQuiet, plate, plateLink, shell } from "./styles";
 
-type NavKey = "privacy" | "delete-account";
+type NavKey = "privacy" | "terms" | "delete-account";
 
 type SiteHeaderProps = {
     /** Rendered under the bar, inside the same ink plate (page title, lede). */
@@ -14,6 +14,7 @@ type SiteHeaderProps = {
 
 const links = [
     { key: "privacy", href: "/privacy", label: "Privacy" },
+    { key: "terms", href: "/terms", label: "Terms" },
     { key: "delete-account", href: "/delete-account", label: "Delete account" },
 ] as const;
 

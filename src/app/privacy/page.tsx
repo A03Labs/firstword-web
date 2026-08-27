@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { SiteFooter } from "../components/site-footer";
+import { CONTACT_EMAIL, SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 import { displayLg, eyebrowOnInk, ledeOnInk, shell } from "../components/styles";
 
@@ -646,7 +646,7 @@ export default function PrivacyPolicyPage() {
                             <a href="https://firstword.online">firstword.online</a>
                             <br />
                             Email: {" "}
-                            <a href="mailto:hello@firstword.online">hello@firstword.online</a>
+                            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                             <br />
                             Developer: <strong>Alabo Excel</strong>
                         </p>
