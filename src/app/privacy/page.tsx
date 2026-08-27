@@ -515,7 +515,11 @@ export default function PrivacyPolicyPage() {
                     </PolicySection>
 
                     <PolicySection number="17" title="Account Deletion">
-                        <p>You may request deletion of your FirstWord account.</p>
+                        <p>
+                            You may delete your FirstWord account at any time from Settings &rarr;
+                            Account &rarr; Delete account inside the app, or by requesting deletion
+                            from us.
+                        </p>
                         <p>
                             When an account is deleted, we will delete or anonymize information
                             associated with the account, subject to applicable legal and security

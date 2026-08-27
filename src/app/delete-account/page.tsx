@@ -17,16 +17,21 @@ import {
 
 export const metadata: Metadata = {
     title: "Delete Account",
-    description: "Request deletion of your FirstWord account and associated data.",
+    description: "Delete your FirstWord account and associated data from inside the app.",
 };
 
 const deletionSubject = "FirstWord Account Deletion Request";
 const deletionHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(deletionSubject)}`;
 
+/** The in-app route, rendered as a path so it can be scanned without reading
+ *  the numbered steps underneath it. */
+const appPath = ["Settings", "Account", "Delete account"];
+
 const steps = [
-    "Tap the button below to open an email addressed to FirstWord.",
-    "Send the request from the email address connected to your account.",
-    "We may ask you to verify ownership before processing the request.",
+    "Open FirstWord and go to Settings.",
+    "Tap Account.",
+    "Tap Delete account — it sits directly beneath Sign out, and both are in red.",
+    "Confirm the prompt. Your account and its data are queued for deletion straight away.",
 ];
 
 const dataList = [
@@ -44,8 +49,8 @@ export default function DeleteAccountPage() {
                     <p className={eyebrowOnInk}>Account support</p>
                     <h1 className={`${displayLg} mt-5 max-w-[14ch]`}>Delete your account.</h1>
                     <p className={`${ledeOnInk} mt-7 max-w-[58ch]`}>
-                        We can remove your FirstWord account and the personal data associated with
-                        it. Requests are made by email so we can confirm the account is yours.
+                        You can remove your FirstWord account and the personal data associated with
+                        it from inside the app, in a few taps, without contacting us.
                     </p>
                 </div>
             </SiteHeader>
@@ -65,7 +70,30 @@ export default function DeleteAccountPage() {
                     </div>
 
                     <section className={panelPad}>
-                        <h2 className={displayMd}>How to request deletion</h2>
+                        <h2 className={displayMd}>Delete from the app</h2>
+
+                        {/* The path itself. Chevrons are decorative — the ordered list below
+                            carries the same route for anyone not reading the row. */}
+                        <p
+                            className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-[0.12em]"
+                            aria-hidden="true"
+                        >
+                            {appPath.map((crumb, index) => (
+                                <span className="flex items-center gap-x-2" key={crumb}>
+                                    {index > 0 ? <span className="text-muted">&rarr;</span> : null}
+                                    <span
+                                        className={
+                                            index === appPath.length - 1
+                                                ? "text-foreground"
+                                                : "text-muted"
+                                        }
+                                    >
+                                        {crumb}
+                                    </span>
+                                </span>
+                            ))}
+                        </p>
+
                         <ol className="mt-6 grid gap-4">
                             {steps.map((step, index) => (
                                 <li className="flex gap-4 text-base leading-7" key={step}>
@@ -81,15 +109,27 @@ export default function DeleteAccountPage() {
                                 </li>
                             ))}
                         </ol>
+                    </section>
 
-                        <a className={`${btnInk} mt-8 w-full uppercase tracking-[0.12em] sm:w-auto`} href={deletionHref}>
-                            Request account deletion
+                    {/* <section className={panelPad}>
+                        <h2 className={label}>If you cannot reach the app</h2>
+                        <p className="mt-4 text-sm leading-6">
+                            Lost the device, or already removed FirstWord? Email us instead. Send
+                            the request from the address connected to your account — we may ask you
+                            to verify ownership before processing it.
+                        </p>
+
+                        <a
+                            className={`${btnInk} mt-6 w-full uppercase tracking-[0.12em] sm:w-auto`}
+                            href={deletionHref}
+                        >
+                            Request deletion by email
                         </a>
 
                         <p className="mt-4 text-xs leading-5 text-muted">
                             Opens your email app with the subject &ldquo;{deletionSubject}&rdquo;.
                         </p>
-                    </section>
+                    </section> */}
 
                     <section className={panelPad}>
                         <h2 className={label}>What will be deleted</h2>
@@ -100,7 +140,7 @@ export default function DeleteAccountPage() {
                         </ul>
                     </section>
 
-                    <section className={panelPad}>
+                    {/* <section className={panelPad}>
                         <p className="text-sm leading-6 text-muted">
                             Some information may be retained temporarily in encrypted backups, or
                             where required for legal, security, or fraud-prevention purposes. The
@@ -113,7 +153,7 @@ export default function DeleteAccountPage() {
                             </Link>
                             .
                         </p>
-                    </section>
+                    </section> */}
                 </div>
             </main>
 
