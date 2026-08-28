@@ -14,6 +14,9 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    // The build script is run directly by Node's TypeScript loader, which needs
+    // explicit `.ts` specifiers; `noEmit` makes that safe here.
+    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,

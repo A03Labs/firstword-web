@@ -13,6 +13,9 @@ export function SiteFooter() {
             >
                 <Brand />
                 <div className="flex flex-wrap gap-x-6 gap-y-2">
+                    <Link className={plateLink} href="/bibles">
+                        Bible Translations
+                    </Link>
                     <Link className={plateLink} href="/privacy">
                         Privacy Policy
                     </Link>
