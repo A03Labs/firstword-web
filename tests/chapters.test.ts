@@ -38,7 +38,7 @@ describe("GET /api/bibles/:translationId/:book/:chapter", () => {
         expect(body.chapter).toBe(1);
         expect(body.verses).toHaveLength(31);
         expect(body.verses[0].verse).toBe(1);
-        expect(body.verses[0].text).toContain("In the beginning");
+        expect(body.verses[0].text).toBe("At the very start, God created the heavens and the earth.");
         expect(body.verses.map((entry) => entry.verse)).toEqual(
             Array.from({ length: 31 }, (_, index) => index + 1),
         );

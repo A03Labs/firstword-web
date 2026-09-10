@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run build:bible-data && next dev",
+    "refresh:genz": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/refresh-genz-voice.mts && npm run build:bible-data",
     "build:bible-data": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-bible-data.mts",
     "prebuild": "npm run build:bible-data",
     "build": "next build",
