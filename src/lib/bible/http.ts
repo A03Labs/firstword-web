@@ -29,6 +29,8 @@ export type ErrorCode =
     | "INVALID_VERSE"
     | "CHAPTER_NOT_FOUND"
     | "VERSE_NOT_FOUND"
+    | "UNKNOWN_DOCUMENT"
+    | "INVALID_FORMAT"
     | "INTERNAL_ERROR";
 
 /**
@@ -119,7 +121,7 @@ function negotiateEncoding(request: Request): "br" | "gzip" | null {
 }
 
 /**
- * Compresses a JSON body when the client accepts it.
+ * Compresses a response body when the client accepts it.
  *
  * Next's built-in `compress` option does not reach Route Handler responses — a
  * 17 KB chapter goes out chunked and uncompressed from `next start` — so the API
@@ -159,17 +161,27 @@ function compressBody(request: Request, body: string, headers: Headers): BodyIni
     return bytes;
 }
 
+/** A text response of any content type, with the API's CORS, caching and compression. */
+export function textResponse(
+    request: Request,
+    body: string,
+    contentType: string,
+    { status = 200, cacheControl = CACHE_ONE_HOUR, headers: extra }: ResponseOptions = {},
+): Response {
+    const headers = baseHeaders(request, cacheControl);
+    headers.set("Content-Type", contentType);
+    const payload = compressBody(request, body, headers);
+    for (const [name, value] of Object.entries(extra ?? {})) headers.set(name, value);
+    return new Response(payload, { status, headers });
+}
+
 /** A JSON response from an already-serialised body. */
 export function jsonTextResponse(
     request: Request,
     body: string,
-    { status = 200, cacheControl = CACHE_ONE_HOUR, headers: extra }: ResponseOptions = {},
+    options: ResponseOptions = {},
 ): Response {
-    const headers = baseHeaders(request, cacheControl);
-    headers.set("Content-Type", "application/json; charset=utf-8");
-    const payload = compressBody(request, body, headers);
-    for (const [name, value] of Object.entries(extra ?? {})) headers.set(name, value);
-    return new Response(payload, { status, headers });
+    return textResponse(request, body, "application/json; charset=utf-8", options);
 }
 
 export type ResponseOptions = {

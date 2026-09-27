@@ -101,6 +101,20 @@ React Native / Expo integration guide for the FirstWord mobile app, including a
 copy-paste client, offline install, and an integration checklist, is in
 [docs/mobile-integration.md](docs/mobile-integration.md).
 
+## Legal documents
+
+The Terms of Use and Privacy Policy are stored as data in `src/lib/legal/`. Both the
+`/terms` and `/privacy` pages and a JSON API read from it:
+
+```
+GET /api/legal                              list of documents with last-updated dates
+GET /api/legal/:document                    terms | privacy, structured JSON
+GET /api/legal/:document?format=markdown    the same content as Markdown
+```
+
+Response shapes, a React Native renderer, how to check for updated documents, and how to
+edit the copy are in [docs/legal-api.md](docs/legal-api.md).
+
 ## Environment variables
 
 None are required. Two are available:

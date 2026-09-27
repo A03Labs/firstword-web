@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+import { CONTACT_EMAIL } from "@/lib/legal/contact";
+
 import { Brand } from "./brand";
 import { plate, plateLink, shell } from "./styles";
 
-export const CONTACT_EMAIL = "firstwordonline@gmail.com";
+export { CONTACT_EMAIL };
 
 export function SiteFooter() {
     return (
