@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     if (!translation) return {};
     return {
         title: translation.name,
-        description: `${translation.blurb} Download all ${translation.verseCount.toLocaleString("en-US")} verses as JSON, or read it online.`,
+        description: `${translation.blurb} Read all ${translation.verseCount.toLocaleString("en-US")} verses online.`,
     };
 }
 
@@ -48,7 +48,6 @@ function facts(translation: NonNullable<ReturnType<typeof getTranslationBySlug>>
         ["Source text", `${translation.source} (public domain)`],
         ["Verses", translation.verseCount.toLocaleString("en-US")],
         ["Translation ID", translation.id],
-        ["Format", "Flat JSON array of {book, chapter, verse, text}"],
     ] as const;
 }
 
@@ -56,7 +55,6 @@ export default async function TranslationPage({ params }: Params) {
     const translation = getTranslationBySlug((await params).slug);
     if (!translation) notFound();
 
-    const downloadHref = `/api/bibles/${translation.id}/download`;
     const readHref = `/read?translation=${translation.id}`;
 
     return (
@@ -85,29 +83,18 @@ export default async function TranslationPage({ params }: Params) {
                     </div>
 
                     <section className={panelPad}>
-                        <h2 className={displayMd}>Download the full translation</h2>
+                        <h2 className={displayMd}>Read it online</h2>
                         <p className="mt-4 text-base leading-7">
-                            All {translation.verseCount.toLocaleString("en-US")} verses in one file,
-                            in the same flat JSON shape the API serves.
+                            All {translation.verseCount.toLocaleString("en-US")} verses, chapter by
+                            chapter, in the online reader. No account needed.
                         </p>
 
-                        <a
+                        <Link
                             className={`${btnInk} mt-6 w-full uppercase tracking-[0.12em] sm:w-auto`}
-                            href={downloadHref}
-                            download={translation.downloadFilename}
+                            href={readHref}
                         >
-                            Download JSON
-                        </a>
-
-                        <p className="mt-4 text-xs leading-5 text-muted">
-                            Saves as{" "}
-                            <span className="font-mono">{translation.downloadFilename}</span>. You
-                            can also browse it{" "}
-                            <Link className="underline decoration-1 underline-offset-4" href={readHref}>
-                                online in the reader
-                            </Link>
-                            .
-                        </p>
+                            Read online
+                        </Link>
                     </section>
 
                     <section className={panelPad}>
@@ -134,7 +121,6 @@ export default async function TranslationPage({ params }: Params) {
                             <li>GET /api/bibles/{translation.id}</li>
                             <li>GET /api/bibles/{translation.id}/43/3</li>
                             <li>GET /api/bibles/{translation.id}/43/3/16</li>
-                            <li>GET /api/bibles/{translation.id}/download</li>
                         </ul>
                     </section>
 

@@ -1,7 +1,7 @@
 # Bible API
 
 A public, unauthenticated JSON API for the two FirstWord paraphrase editions of the
-World English Bible, plus the human-facing download pages and online reader.
+World English Bible, plus the human-facing translation pages and online reader.
 
 > Based on the World English Bible (WEB), a public-domain Bible translation. Gen Z and
 > Nigerian Pidgin wording is an automated paraphrase and should receive editorial and
@@ -11,7 +11,7 @@ Neither edition is an independently translated critical text.
 
 ## Translations
 
-| ID       | Name                  | Language        | Source              | Verses | Download page    |
+| ID       | Name                  | Language        | Source              | Verses | Detail page      |
 | -------- | --------------------- | --------------- | ------------------- | ------ | ---------------- |
 | `GENZ`   | Gen Z Bible           | English         | World English Bible | 31,105 | `/bibles/genz`   |
 | `PIDGIN` | Nigerian Pidgin Bible | Nigerian Pidgin | World English Bible | 31,105 | `/bibles/pidgin` |
@@ -397,7 +397,7 @@ curl -s "$BASE/api/bibles/..%2F..%2Fetc%2Fpasswd/download"
 | Route             | What it is                                                              |
 | ----------------- | ----------------------------------------------------------------------- |
 | `/bibles`         | Both translations, with links to the detail pages and the reader.       |
-| `/bibles/genz`    | Gen Z Bible: facts, paraphrase warning, attribution, **Download JSON**. |
+| `/bibles/genz`    | Gen Z Bible: facts, paraphrase warning, attribution, **Read online**.   |
 | `/bibles/pidgin`  | Same, for the Nigerian Pidgin Bible.                                    |
 | `/read`           | Online reader.                                                          |
 

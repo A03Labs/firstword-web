@@ -413,7 +413,7 @@ export function BibleReader() {
                         className="text-xs font-semibold uppercase tracking-[0.12em] underline decoration-1 underline-offset-4"
                         href={`/bibles/${translation?.slug ?? ""}`}
                     >
-                        Download JSON
+                        About this translation
                     </Link>
                 </div>
             </div>

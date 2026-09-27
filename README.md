@@ -25,7 +25,7 @@ clone serves the API correctly on the first request.
 | `src/app/privacy/`       | Privacy policy                                                   |
 | `src/app/terms/`         | Terms of use                                                     |
 | `src/app/delete-account/`| Account deletion instructions                                    |
-| `src/app/bibles/`        | Translation catalog and per-translation download pages           |
+| `src/app/bibles/`        | Translation catalog and per-translation detail pages             |
 | `src/app/read/`          | Online Bible reader                                              |
 | `src/app/api/bibles/`    | Public Bible API route handlers                                  |
 | `src/lib/bible/`         | Translation allowlist, canon table, validation, data access      |

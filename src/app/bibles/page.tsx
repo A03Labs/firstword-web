@@ -19,7 +19,7 @@ import { ATTRIBUTION, TRANSLATIONS } from "@/lib/bible/translations";
 export const metadata: Metadata = {
     title: "Bible Translations",
     description:
-        "Download the Gen Z and Nigerian Pidgin editions of the World English Bible as JSON, or read them online.",
+        "Read the Gen Z and Nigerian Pidgin editions of the World English Bible online.",
 };
 
 export default function BiblesIndexPage() {
@@ -30,9 +30,8 @@ export default function BiblesIndexPage() {
                     <p className={eyebrowOnInk}>Open data</p>
                     <h1 className={`${displayLg} mt-5 max-w-[16ch]`}>Bible translations.</h1>
                     <p className={`${ledeOnInk} mt-7 max-w-[58ch]`}>
-                        Two paraphrase editions of the public-domain World English Bible, published
-                        as flat JSON and readable in the browser. Free to download, no account
-                        needed.
+                        Two paraphrase editions of the public-domain World English Bible, free to
+                        read in the browser. No account needed.
                     </p>
                 </div>
             </SiteHeader>
@@ -64,15 +63,15 @@ export default function BiblesIndexPage() {
                             <div className="mt-auto flex flex-wrap gap-3 pt-8">
                                 <Link
                                     className={`${btnInk} uppercase tracking-[0.12em]`}
-                                    href={`/bibles/${translation.slug}`}
-                                >
-                                    Details &amp; download
-                                </Link>
-                                <Link
-                                    className="inline-flex min-h-[3.25rem] items-center text-sm font-semibold underline decoration-1 underline-offset-4"
                                     href={`/read?translation=${translation.id}`}
                                 >
                                     Read online
+                                </Link>
+                                <Link
+                                    className="inline-flex min-h-[3.25rem] items-center text-sm font-semibold underline decoration-1 underline-offset-4"
+                                    href={`/bibles/${translation.slug}`}
+                                >
+                                    Details
                                 </Link>
                             </div>
                         </section>
