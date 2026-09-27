@@ -1,8 +1,18 @@
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 type Verse = { book: number; chapter: number; verse: number; text: string };
+
+/**
+ * Once `scripts/retranslate-bible.mts` has applied its output, the rule-based
+ * render these blocks describe no longer exists; `tests/translation-quality.test.ts`
+ * holds the text to its own gates instead. The editor-written verses tested in
+ * "GENZ source data" are locked and hold either way.
+ */
+const retranslated = existsSync(path.join(process.cwd(), "data", "bibles", "GENZ", "meta.json"));
+const ruleRender = describe.skipIf(retranslated);
 const cannedOpener = /^(?:Okay, so |Basically, |Here’s the thing: |Real talk: |Picture this: |So, get this: )/;
 
 async function genzVerses() {
@@ -83,7 +93,7 @@ describe("GENZ source data", () => {
  * wrong in a way regexes are typically wrong -- ignoring sentence position,
  * ignoring word boundaries -- fails here instead of shipping.
  */
-describe("GENZ render quality", () => {
+ruleRender("GENZ render quality", () => {
     it("is rendered from a base file the render never writes to", async () => {
         const base = JSON.parse(
             await readFile(path.join(process.cwd(), "data", "bibles", "GENZ", "base.json"), "utf8"),
@@ -157,7 +167,7 @@ describe("GENZ render quality", () => {
  * The source text arrived with two blanket substitutions already applied to it.
  * These pin the grammatical distinction each one lost.
  */
-describe("GENZ source repairs", () => {
+ruleRender("GENZ source repairs", () => {
     it("restores `beloved` where `Dear friends` was not a vocative", async () => {
         const verses = await genzVerses();
         const mark = verses.find(({ book, chapter, verse }) =>
@@ -213,7 +223,7 @@ describe("GENZ source repairs", () => {
  * and clause shape, not just vocabulary. Each of these pins a case where the
  * obvious version of the rule produced something ungrammatical.
  */
-describe("GENZ conversational rules", () => {
+ruleRender("GENZ conversational rules", () => {
     it("states the future the way speech does", async () => {
         const verses = await genzVerses();
         const psalm = verses.find(({ book, chapter, verse }) =>
@@ -290,7 +300,7 @@ describe("GENZ conversational rules", () => {
     });
 });
 
-describe("GENZ saturation layer", () => {
+ruleRender("GENZ saturation layer", () => {
     const MARKERS =
         /\b(no cap|for real|fr|lowkey|bro|fam|dude|dudes|guys|crib|opp|opps|shook|hyped|heated|vibe|vibes|vibing|flex|clown|clueless|shady|solid|gorgeous|bounced|linked up|caught on|gonna|gotta|yeah|honestly|seriously|straight-up|huge|massive|check it out|okay so|listen|real talk|no joke|were like|was like|top dog|goat)\b/gi;
 
@@ -364,7 +374,7 @@ describe("GENZ saturation layer", () => {
  * assertions below therefore match the phrase rather than the verse opening --
  * what they are checking is the rewrite rule, not where the sentence starts.
  */
-describe("GENZ creation-week numbering", () => {
+ruleRender("GENZ creation-week numbering", () => {
     it("counts the days as speech does, not as ordinals", async () => {
         const days = (await genzVerses())
             .filter(({ book, chapter }) => book === 1 && chapter === 1)

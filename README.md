@@ -101,6 +101,13 @@ React Native / Expo integration guide for the FirstWord mobile app, including a
 copy-paste client, offline install, and an integration checklist, is in
 [docs/mobile-integration.md](docs/mobile-integration.md).
 
+### Re-translating the editions
+
+The GENZ and PIDGIN texts are regenerated from the WEB chapter by chapter with Claude,
+checked by automated quality gates, reviewed, and revised before they reach `full.json`.
+Style guides, costs, and the human review still required are in
+[docs/retranslation.md](docs/retranslation.md).
+
 ## Legal documents
 
 The Terms of Use and Privacy Policy are stored as data in `src/lib/legal/`. Both the
@@ -129,6 +136,7 @@ None are required. Two are available:
 ```bash
 npm run dev                 # regenerate Bible data, then start the dev server
 npm run build:bible-data    # regenerate the preprocessed chapter files
+npm run retranslate -- run GENZ   # re-translate an edition with Claude (see docs/retranslation.md)
 npm run typecheck           # tsc --noEmit
 npm run lint                # eslint
 npm test                    # vitest run (regenerates data first)

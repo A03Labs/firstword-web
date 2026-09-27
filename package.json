@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "npm run build:bible-data && next dev",
-    "refresh:genz": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/refresh-genz-voice.mts && npm run build:bible-data",
     "build:bible-data": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-bible-data.mts",
+    "retranslate": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/retranslate-bible.mts",
     "prebuild": "npm run build:bible-data",
     "build": "next build",
     "start": "next start",
@@ -21,6 +21,7 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
